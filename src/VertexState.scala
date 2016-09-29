@@ -4,7 +4,6 @@
  * Contains all information needed for louvain community detection
  */
 class VertexState extends Serializable{
-
   var community = -1L
   var communitySigmaTot = 0L
   var internalWeight = 0L  // self edges
@@ -12,7 +11,7 @@ class VertexState extends Serializable{
   var changed = false
    
   override def toString(): String = {
-    "{community:"+community+",communitySigmaTot:"+communitySigmaTot+
+   "{community:"+community+",communitySigmaTot:"+communitySigmaTot+
     ",internalWeight:"+internalWeight+",nodeWeight:"+nodeWeight+"}"
   }
   

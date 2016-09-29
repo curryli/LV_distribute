@@ -249,7 +249,7 @@ object LouvainCore {
    * Compress a graph by its communities, aggregate both internal node weights and edge
    * weights within communities.
    */
-  def compressGraph(graph:Graph[VertexState,Long],debug:Boolean=true) : Graph[VertexState,Long] = {
+  def compressGraph(graph:Graph[VertexState,Long], level: Int, debug:Boolean=true) : Graph[VertexState,Long] = {
 
     // aggregate the edge weights of self loops. edges with both src and dst in the same community.
 	// WARNING  can not use graph.mapReduceTriplets because we are mapping to new vertexIds
@@ -268,6 +268,7 @@ object LouvainCore {
     val newVerts = internalWeights.leftOuterJoin(internalEdgeWeights).map({case (vid,(weight1,weight2Option)) =>
       val weight2 = weight2Option.getOrElse(0L)
       val state = new VertexState()
+        
       state.community = vid
       state.changed = false
       state.communitySigmaTot = 0L
